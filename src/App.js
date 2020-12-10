@@ -1,9 +1,13 @@
 import './App.css';
+import Header from './Header';
 
 function App() {
   return (
     <div className="app">
-      <h1>Lets Build Pesan Antar Makanan yang bagus !!!</h1>
+      <Header/>
+      {/* Header */}
+      {/* Home */}
+      {/* Footer */}
     </div>
   );
 }
