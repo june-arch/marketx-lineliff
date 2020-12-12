@@ -1,29 +1,41 @@
 .header {
     height: 60px;
-    display: flex;
-    align-items: center;
-    background-color: #131921;
+    background-color: #003366;
     position: sticky;
     top: 0;
     z-index: 100;
 }
 
+.wrapper {
+    max-width: 70%;
+    height: 60px;
+    margin: 0 auto;
+}
+
+.header_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .header_logo {
     width: 100px;
     object-fit: contain;
-    margin: 0 20px;
-    margin-top: 18px;
+    margin: 0 5px;
+    margin-top: 8px;
 }
 
-.header_bahasa {
+.header_nav {
     display: flex;
-    align-items: center;
-    color: white;
+    justify-content: center;
 }
 
-.header_bahasaIcon {
-    padding: 5px;
-    height: 22px !important;
+.header_option {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: white;
 }
 
 .header_optionLineOne {
@@ -46,26 +58,75 @@
     margin-right: 10px;
 }
 
-.header_nav {
+.header_bahasa {
     display: flex;
-    justify-content: space-evenly;
-
+    align-items: center;
+    color: white;
 }
 
-.header_option {
-    display: flex;
-    flex-direction: column;
-    margin-left: 10px;
-    margin-right: 10px;
-    color: white;
+.header_bahasaIcon {
+    padding: 5px;
+    height: 22px !important;
 }
 
 .header_dropdown {
     background-color: white;
-
 }
 
 .header_select {
     padding: 5px;
     height: 22px !important;
+}
+
+.header_menu {
+    display: none !important;
+}
+
+@media (max-width: 730px) {
+    .wrapper {
+        max-width: 90%;
+        height: 60px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 550px) {
+    .header_nav {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        z-index: -1;
+        background-color: #02468a;
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(-100%);
+        padding: 20px;
+        transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    }
+
+    .header_nav.active {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .header_nav.deactive {
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(-100);
+    }
+
+    .header_menu {
+        display: flex !important;
+        color: white;
+        padding: 5px;
+        height: 32px !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .header_bahasa {
+        display: none !important;
+    }
 }
