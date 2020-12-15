@@ -5,11 +5,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { StateProvider } from './StateProvider';
 import reducer, {initialState} from './reducer';
+import { LiffProvider } from 'react-liff';
+
+const liffId = '1655315791-mY2O8207';
+const stubEnabled = false;
 
 ReactDOM.render(
   <React.StrictMode>
     <StateProvider initialState={initialState} reducer={reducer}>
-      <App />
+      <LiffProvider liffId={liffId} stubEnabled={stubEnabled}>
+        <App />
+      </LiffProvider>
     </StateProvider>
   </React.StrictMode>,
   document.getElementById('root')

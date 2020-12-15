@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import './Header.css'
 import LanguageIcon from '@material-ui/icons/Language';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
@@ -6,12 +6,33 @@ import MenuIcon from '@material-ui/icons/Menu';
 import {MenuItem,FormControl,Select,IconButton} from "@material-ui/core";
 import { Link } from 'react-router-dom';
 import { useStateValue } from './StateProvider';
+import { useLiff } from 'react-liff';
 
 
 function Header() {
+    const {error, liff, isLoggedIn, ready} = useLiff();
     const [language, setLanguage] = useState('bahasa');
-    const [{ basket }, dispatch] = useStateValue();
+    const [{ basket, user }, dispatch] = useStateValue();
     const [menu, setMenu] = useState(false);
+    
+    useEffect(() => {
+        if(isLoggedIn){
+        (async () => {
+            const profile = await liff.getProfile();
+            dispatch({
+                type: 'SET_USER',
+                user:profile
+            })
+        })();
+        }else {
+        dispatch({
+            type: 'SET_USER',
+            user:null
+        })
+        }
+
+    }, [isLoggedIn]);
+
     const onBahasaChange = async (event) => {
         const languageCode = event.target.value;
         setLanguage(languageCode)
@@ -21,6 +42,15 @@ function Header() {
         event.preventDefault();
         menu ? setMenu(false) : setMenu(true)
     }
+
+    const handleLoginLiff = () => {
+        liff.login();
+    }
+
+    const handleLogoutLiff = () => {
+        liff.logout();
+    }
+
     return (
         <header className="header">
             <div className="wrapper header_wrapper">
@@ -31,10 +61,18 @@ function Header() {
                     <MenuIcon className="header_menu" />
                 </IconButton>
                 <nav className={`header_nav ${menu ? "active" : "deactive"}`}>
+                    {user ? (
                     <div className="header_option">
                         <span className="header_optionLineOne">Hello Guest</span>
-                        <span className="header_optionLineTwo">Sign In</span>
+                        <button className="header_optionLineTwo" onClick={handleLogoutLiff}>Sign Out</button>
                     </div>
+                    ) : (
+                    <div className="header_option">
+                        <span className="header_optionLineOne">Hello Guest</span>
+                        <button className="header_optionLineTwo" onClick={handleLoginLiff}>Sign In</button>
+                    </div>
+                    )}
+                    
                     <div className="header_option">
                         <span className="header_optionLineOne">Your</span>
                         <span className="header_optionLineTwo">Orders</span>
