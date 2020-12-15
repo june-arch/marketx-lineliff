@@ -4,10 +4,13 @@ import LanguageIcon from '@material-ui/icons/Language';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
 import MenuIcon from '@material-ui/icons/Menu';
 import {MenuItem,FormControl,Select,IconButton} from "@material-ui/core";
+import { Link } from 'react-router-dom';
+import { useStateValue } from './StateProvider';
 
 
 function Header() {
     const [language, setLanguage] = useState('bahasa');
+    const [{ basket }, dispatch] = useStateValue();
     const [menu, setMenu] = useState(false);
     const onBahasaChange = async (event) => {
         const languageCode = event.target.value;
@@ -21,7 +24,9 @@ function Header() {
     return (
         <header className="header">
             <div className="wrapper header_wrapper">
-                <img className="header_logo" src="https://previews.dropbox.com/p/thumb/ABARuYU3Us2OZnclssJdzm9pOxay2KoIV-GNe6nKzHgLkt3ssmwadz8uCBSBTye2xgvlLOfxsDDY1UwTaNLLjbb54TvyC_3uq8Ro35OzeElKDwYL7_8GyAT6KOSVmV-AG-6OlvJaqdQjxcpRVMmyjScI2FELiej-xxy2BnuBnltYkgJdEaNfFwDPbCDt5BJUwEJn_6dLZPyHKm7XmVhhMVrMsHjr4rQdzPiZyjyNmuxeMAEIOAGMRwCDlxA4cFjQFBef19_L5PoRNpHQ2vhSyu7LeG6mMW-9hkBnlLPlSP5kyX4-XPk4r4wFWvo7ejNz0REesLPJbKA0ZcAWr0Efqzb0kaDN9-0gDshRXIlbeMyOIQ/p.png?fv_content=true&size_mode=5" alt="your-logo"/>
+                <Link to="/">
+                    <img className="header_logo" src="https://previews.dropbox.com/p/thumb/ABARuYU3Us2OZnclssJdzm9pOxay2KoIV-GNe6nKzHgLkt3ssmwadz8uCBSBTye2xgvlLOfxsDDY1UwTaNLLjbb54TvyC_3uq8Ro35OzeElKDwYL7_8GyAT6KOSVmV-AG-6OlvJaqdQjxcpRVMmyjScI2FELiej-xxy2BnuBnltYkgJdEaNfFwDPbCDt5BJUwEJn_6dLZPyHKm7XmVhhMVrMsHjr4rQdzPiZyjyNmuxeMAEIOAGMRwCDlxA4cFjQFBef19_L5PoRNpHQ2vhSyu7LeG6mMW-9hkBnlLPlSP5kyX4-XPk4r4wFWvo7ejNz0REesLPJbKA0ZcAWr0Efqzb0kaDN9-0gDshRXIlbeMyOIQ/p.png?fv_content=true&size_mode=5" alt="your-logo"/>
+                </Link>
                 <IconButton onClick={toogleMenu}>
                     <MenuIcon className="header_menu" />
                 </IconButton>
@@ -34,10 +39,12 @@ function Header() {
                         <span className="header_optionLineOne">Your</span>
                         <span className="header_optionLineTwo">Orders</span>
                     </div>
-                    <div className="header_optionBasket">
-                        <ShoppingBasketIcon />
-                        <span className="header_optionLineTwo header_basketCount">0</span>
-                    </div>
+                    <Link to="/checkout">
+                        <div className="header_optionBasket">
+                            <ShoppingBasketIcon />
+                            <span className="header_optionLineTwo header_basketCount">{basket?.length}</span>
+                        </div>
+                    </Link>
                     <div className="header_bahasa">
                         <LanguageIcon className="header_bahasaIcon" />
                         <FormControl className="header_dropdown">

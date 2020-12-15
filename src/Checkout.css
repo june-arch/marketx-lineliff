@@ -1,0 +1,36 @@
+.checkout {
+    background-color: white;
+    height: max-content;
+}
+
+.wrapper {
+    max-width: 70%;
+}
+
+.checkout_wrapper {
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+    background-color: white;
+    height: max-content;
+}
+
+.checkout_title {
+    margin-right: 10px;
+    padding: 10px;
+    border-bottom: 1px solid lightgray;
+}
+
+@media (max-width: 990px) {
+    .wrapper {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 780px) {
+    .checkout_wrapper {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
