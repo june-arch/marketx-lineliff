@@ -2,11 +2,10 @@ import React, {useEffect, useState} from 'react'
 import './Header.css'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
 import MenuIcon from '@material-ui/icons/Menu';
-import {MenuItem,FormControl,Select,IconButton} from "@material-ui/core";
 import { Link } from 'react-router-dom';
 import { useStateValue } from './StateProvider';
 import { useLiff } from 'react-liff';
-
+// import {MenuItem,FormControl,Select,IconButton} from "@material-ui/core";
 // import LanguageIcon from '@material-ui/icons/Language';
 
 
@@ -71,19 +70,21 @@ function Header() {
                     {user ? (
                     <div className="header_option">
                         <span className="header_optionLineOne">Hello {user.displayName}</span>
-                        <button className="header_optionLineTwo" onClick={handleLogoutLiff}>Sign Out</button>
+                        <span className="header_optionLineTwo" onClick={handleLogoutLiff}>Sign Out</span>
                     </div>
                     ) : (
                     <div className="header_option">
                         <span className="header_optionLineOne">Hello Guest</span>
-                        <button className="header_optionLineTwo" onClick={handleLoginLiff}>Sign In</button>
+                        <span className="header_optionLineTwo" onClick={handleLoginLiff}>Sign In</span>
                     </div>
                     )}
                     
-                    <div className="header_option">
-                        <span className="header_optionLineOne">Your</span>
-                        <span className="header_optionLineTwo">Orders</span>
-                    </div>
+                   <Link to="/checkout">
+                        <div className="header_option">
+                            <span className="header_optionLineOne">Your</span>
+                            <span className="header_optionLineTwo">Orders</span>
+                        </div>
+                    </Link>
                     <Link to="/checkout">
                         <div className="header_optionBasket">
                             <ShoppingBasketIcon />

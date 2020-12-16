@@ -47,6 +47,10 @@
     font-weight: 800;
 }
 
+.header_optionLineTwo:hover {
+    cursor: pointer;
+}
+
 .header_optionBasket {
     display: flex;
     align-items: center;

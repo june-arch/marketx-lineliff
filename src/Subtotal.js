@@ -3,10 +3,49 @@ import './Subtotal.css'
 import CurrencyFormat from 'react-currency-format'
 import { useStateValue } from './StateProvider'
 import { getBasketTotal } from './reducer';
+import { useLiff } from 'react-liff';
+import { useHistory } from 'react-router-dom';
 
 function Subtotal() {
-    const [{ basket }, dispatch]= useStateValue();
+    const history = useHistory();
+    const [{ basket, user }, dispatch]= useStateValue();
+    const { error, liff, isLoggedIn, ready } = useLiff();
+    
+    function countUnique(arr) {
+        let counts = {};
+        arr.forEach((el) => counts[el.title] = 1  + (counts[el.title] || 0))
+        return counts;
+    }
+      
 
+    const processToOrder = () => {
+        if(!basket.length > 0) {
+            alert('keranjang kosong, silahkan pilih dulu terima kasih!');
+            return history.push('/');
+        }
+        if(!isLoggedIn) return alert('silahkan login terlebih dahulu!');
+        if (!liff.isInClient()) {
+            console.log('Currently you are in eksternal browser');
+            dispatch({
+                type:"ORDERED_FROM_BASKET",
+                item:null
+            })
+            alert('terima kasih! order kakak akan segera di proses!');
+            return history.push('/');
+        } else {
+            liff.sendMessages([{
+                'type': 'text',
+                'text': `Hai ${user.displayName}, \n\n Terima kasih telah memesan makanan, berikut adalah detail pesananannya: \n ${countUnique(basket)} \n\n pesanan kakak akan segera di proses dan akan diberitahu jika sudah bisa diambil, \n Mohon di tunggu ya!`
+            }]).then(function() {
+                dispatch({
+                    type:"ORDERED_FROM_BASKET",
+                    item:null
+                })
+            }).catch(function(error) {
+                window.alert('Error sending message: ' + error);
+            });
+        }
+    }
     return (
         <div className="subtotal">
             <CurrencyFormat
@@ -23,7 +62,7 @@ function Subtotal() {
                 thousandSeparator={true}
                 prefix={"Rp."}
             />
-            <button>Proceed to Checkout</button>
+            <button onClick={processToOrder}>Proceed to Checkout</button>
         </div>
     )
 }

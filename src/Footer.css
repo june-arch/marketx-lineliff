@@ -22,3 +22,12 @@
     color: white;
     margin-bottom: 10px;
 }
+
+.footer_eksternalWindow {
+    color: white;
+    margin-top: 10px;
+}
+
+.footer_eksternalWindow:hover {
+    cursor: pointer;
+}
