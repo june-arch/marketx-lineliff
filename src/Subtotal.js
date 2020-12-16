@@ -16,6 +16,16 @@ function Subtotal() {
         arr.forEach((el) => counts[el.title] = 1  + (counts[el.title] || 0))
         return counts;
     }
+
+    var printObj = function(obj) { 
+        var string = ''; 
+
+        for(var prop in obj) { 
+            string+= prop + ': ' + obj[prop]+'; </br>'; 
+        } 
+
+        return string; 
+    } 
       
 
     const processToOrder = () => {
@@ -35,12 +45,14 @@ function Subtotal() {
         } else {
             liff.sendMessages([{
                 'type': 'text',
-                'text': `Hai ${user.displayName}, \n\n Terima kasih telah memesan makanan, berikut adalah detail pesananannya: \n ${countUnique(basket)} \n\n pesanan kakak akan segera di proses dan akan diberitahu jika sudah bisa diambil, \n Mohon di tunggu ya!`
+                'text': `Hai ${user.displayName}, \n\nTerima kasih telah memesan makanan, berikut adalah detail pesananannya: \n ${printObj(countUnique(basket))} \n\npesanan kakak akan segera di proses dan akan diberitahu jika sudah bisa diambil,\nMohon di tunggu ya!`
             }]).then(function() {
                 dispatch({
                     type:"ORDERED_FROM_BASKET",
                     item:null
                 })
+                alert('terima kasih! order kakak akan segera di proses!');
+                return history.push('/');
             }).catch(function(error) {
                 window.alert('Error sending message: ' + error);
             });
