@@ -39,10 +39,11 @@
 }
 
 .header_optionImg {
-    width: 100px;
+    width: 60px;
     object-fit: contain;
     margin: 0 5px;
     margin-top: 8px;
+    border-radius: 50%;
 }
 
 .header_optionLineOne {
