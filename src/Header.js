@@ -20,10 +20,13 @@ function Header() {
 
     useEffect(() => {
         if(isLoggedIn){
-          dispatch({
-            type: 'SET_USER',
-            user:isLoggedIn
-          })
+            (async ()=> {
+                const profile = await liff.getProfile();
+                dispatch({
+                    type: 'SET_USER',
+                    user: profile
+                  })
+            })();
         }else {
           dispatch({
             type: 'SET_USER',
@@ -67,7 +70,7 @@ function Header() {
                 <nav className={`header_nav ${menu ? "active" : "deactive"}`}>
                     {user ? (
                     <div className="header_option">
-                        <span className="header_optionLineOne">Hello Guest</span>
+                        <span className="header_optionLineOne">Hello {user.displayName}</span>
                         <button className="header_optionLineTwo" onClick={handleLogoutLiff}>Sign Out</button>
                     </div>
                     ) : (
