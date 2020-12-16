@@ -67,6 +67,10 @@ function Header() {
 
                 <MenuIcon className="header_menu" />
                 <nav className={`header_nav ${menu ? "active" : "deactive"}`}>
+                    {user && (
+                    <div className="header_option">
+                        <img className="header_optionImg" src={user.pictureUrl} alt="poto-profil"/>
+                    </div>)}
                     {user ? (
                     <div className="header_option">
                         <span className="header_optionLineOne">Hello {user.displayName}</span>

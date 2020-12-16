@@ -18,10 +18,8 @@ function Footer() {
     
     return (
         <div className="footer">
-            <div>
-                {liff.isInClient() && <span className="footer_eksternalWindow" onClick={openEksternalWindow}>Open Eskternal Window</span>}
-            </div>
-            <div className="footer_logoSocial">
+            {liff.isInClient() && (<div className="footer_eksternalWindow"> <span onClick={openEksternalWindow}> Open Eskternal Window </span> </div>)}
+            <div className={`footer_logoSocial ${!liff.isInClient() && 'margin-top'}`}>
                 <Instagram className="logo"/>
                 <Facebook className="logo"/>
                 <LinkedIn className="logo"/>

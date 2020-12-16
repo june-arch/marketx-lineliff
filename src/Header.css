@@ -38,6 +38,13 @@
     color: white;
 }
 
+.header_optionImg {
+    width: 100px;
+    object-fit: contain;
+    margin: 0 5px;
+    margin-top: 8px;
+}
+
 .header_optionLineOne {
     font-size: 10px;
 }

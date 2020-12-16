@@ -21,7 +21,7 @@ function Subtotal() {
         var string = ''; 
 
         for(var prop in obj) { 
-            string+= prop + ': ' + obj[prop]+'; </br>'; 
+            string+= prop + ': ' + obj[prop]+'\n'; 
         } 
 
         return string; 
@@ -45,7 +45,7 @@ function Subtotal() {
         } else {
             liff.sendMessages([{
                 'type': 'text',
-                'text': `Hai ${user.displayName}, \n\nTerima kasih telah memesan makanan, berikut adalah detail pesananannya: \n ${printObj(countUnique(basket))} \n\npesanan kakak akan segera di proses dan akan diberitahu jika sudah bisa diambil,\nMohon di tunggu ya!`
+                'text': `Hai ${user.displayName}, \n\nTerima kasih telah memesan makanan, berikut adalah detail pesananannya: \n ${printObj(countUnique(basket))} \n\npesanan kakak akan segera di proses dan akan diberitahu jika sudah bisa diambil,\n\nMohon di tunggu ya!`
             }]).then(function() {
                 dispatch({
                     type:"ORDERED_FROM_BASKET",
