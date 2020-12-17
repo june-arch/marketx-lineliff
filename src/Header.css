@@ -39,10 +39,9 @@
 }
 
 .header_optionImg {
-    width: 60px;
+    width: 35px;
     object-fit: contain;
     margin: 0 5px;
-    margin-top: 8px;
     border-radius: 50%;
 }
 
