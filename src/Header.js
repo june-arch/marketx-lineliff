@@ -73,7 +73,7 @@ function Header() {
                     {user ? (
                     <div className="header_option">
                         <span className="header_optionLineOne">Hello {user.displayName}</span>
-                        <span className="header_optionLineTwo" onClick={handleLogoutLiff}>Sign Out</span>
+                        <span className="header_optionLineTwo" onClick={handleLogoutLiff}>{!liff.isInClient() && 'Sign Out'}</span>
                     </div>
                     ) : (
                     <div className="header_option">
